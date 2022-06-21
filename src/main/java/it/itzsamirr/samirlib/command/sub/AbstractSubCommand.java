@@ -1,12 +1,10 @@
 package it.itzsamirr.samirlib.command.sub;
 
 import it.itzsamirr.samirlib.SamirLib;
-import jdk.tools.jlink.plugin.Plugin;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
