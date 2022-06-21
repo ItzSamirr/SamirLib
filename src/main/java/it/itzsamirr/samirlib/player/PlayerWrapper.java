@@ -5,7 +5,6 @@ import it.itzsamirr.samirlib.utils.ReflectionUtils;
 import it.itzsamirr.samirlib.utils.ServerVersion;
 import lombok.Data;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,10 +1,8 @@
 package it.itzsamirr.samirlib.utils;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.server.v1_8_R3.MathHelper;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
