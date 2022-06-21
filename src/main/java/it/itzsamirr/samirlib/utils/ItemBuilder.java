@@ -1,11 +1,8 @@
 package it.itzsamirr.samirlib.utils;
 
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
@@ -33,8 +30,10 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder flag(ItemFlag flag){
-        is.addItemFlags(flag);
+    public ItemBuilder flag(ItemFlag... flag){
+        ItemMeta meta = is.getItemMeta();
+        meta.addItemFlags(flag);
+        is.setItemMeta(meta);
         return this;
     }
 
@@ -46,19 +45,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder durability(int durability){
-        ItemMeta meta = is.getItemMeta();
-        if(meta instanceof Damageable){
-            Damageable damageable = (Damageable) meta;
-            damageable.setDamage(durability);
-            is.setItemMeta(meta);
-        }
-        return this;
-    }
-
-    public ItemBuilder attribute(Attribute attribute, AttributeModifier modifier){
-        ItemMeta meta = is.getItemMeta();
-        meta.addAttributeModifier(attribute, modifier);
-        is.setItemMeta(meta);
+        is.setDurability((short) durability);
         return this;
     }
 

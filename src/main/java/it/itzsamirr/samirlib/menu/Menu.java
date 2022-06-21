@@ -36,7 +36,7 @@ public abstract class Menu<T extends JavaPlugin> implements InventoryHolder {
         return playerMenuData;
     }
 
-    public static final ItemStack FILLER_GLASS = new ItemBuilder(Material.GLASS_PANE).name("").flag(ItemFlag.HIDE_ATTRIBUTES).build();
+    public static final ItemStack FILLER_GLASS = new ItemBuilder(Material.THIN_GLASS).name("").flag(ItemFlag.HIDE_ATTRIBUTES).build();
 
     public abstract String getName();
 

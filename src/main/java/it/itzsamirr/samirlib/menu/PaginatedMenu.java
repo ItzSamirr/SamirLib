@@ -27,7 +27,7 @@ public abstract class PaginatedMenu<T extends JavaPlugin> extends Menu<T>{
 
     public int getMaxPages(){
         List<ItemStack> filtered = new ArrayList<>(Stream.of(getInventory().getContents()).filter(Objects::isNull).collect(Collectors.toList()));
-        filtered.addAll(Stream.of(getInventory().getStorageContents()).filter(Objects::nonNull).filter(item -> !item.isSimilar(Menu.FILLER_GLASS)).collect(Collectors.toList()));
+        filtered.addAll(Stream.of(getInventory().getContents()).filter(Objects::nonNull).filter(item -> !item.isSimilar(Menu.FILLER_GLASS)).collect(Collectors.toList()));
         return filtered.size();
     }
     
