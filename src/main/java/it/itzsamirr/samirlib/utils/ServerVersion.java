@@ -29,7 +29,7 @@ public enum ServerVersion {
     public static ServerVersion getServerVersion(String version) {
         for (int i = 0; i < values().length; i++) {
             ServerVersion v = values()[i];
-            if (v.toString().toLowerCase().startsWith(version.toLowerCase())) {
+            if (v.toString().toLowerCase().substring(3).startsWith(version.toLowerCase())) {
                 return v;
             }
         }
