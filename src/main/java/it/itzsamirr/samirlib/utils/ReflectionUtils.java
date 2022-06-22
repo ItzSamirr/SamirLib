@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +62,7 @@ public class ReflectionUtils {
     @SneakyThrows
     public Method getMethod(Class<?> clazz, String name, Class<?>... parameters){
         if(!methodsCache.containsKey(clazz)){
-            methodsCache.put(clazz, Arrays.asList(clazz.getMethod(name, parameters)));
+            methodsCache.put(clazz, Arrays.asList(clazz.getDeclaredMethod(name, parameters)));
         }
         List<Method> methods = methodsCache.get(clazz);
         if(methods.stream().noneMatch(m -> m.getName().equals(name) && Arrays.equals(m.getParameterTypes(), parameters))){
@@ -73,6 +74,18 @@ public class ReflectionUtils {
                 .filter(m -> m.getName().equals(name))
                 .filter(m -> Arrays.equals(m.getParameterTypes(), parameters))
                 .findFirst().orElse(null);
+    }
+
+    public List<Method> getMethods(Class<?> clazz){
+        if(!methodsCache.containsKey(clazz)){
+            return methodsCache.put(clazz, Arrays.asList(clazz.getDeclaredMethods()));
+        }
+        List<Method> methods = methodsCache.get(clazz);
+        for (Method declaredMethod : clazz.getDeclaredMethods()) {
+            if(!methods.contains(declaredMethod)) methods.add(declaredMethod);
+        }
+        methodsCache.replace(clazz, methods);
+        return methodsCache.get(clazz);
     }
 
     public Method getMethod(String className, String name, Class<?>... parameterTypes){

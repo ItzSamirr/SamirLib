@@ -13,11 +13,6 @@ import java.util.HashMap;
 **/
 public class CommandManager {
     private HashMap<Class<? extends AbstractCommand<?>>, AbstractCommand<?>> commands = new HashMap<>();
-    protected final SamirLibPlugin plugin;
-
-    public CommandManager(SamirLibPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     public <T extends JavaPlugin> void register(T plugin, Class<? extends AbstractCommand<T>>... commands){
         for (int i = 0; i < commands.length; i++) {
@@ -43,6 +38,12 @@ public class CommandManager {
             cmd.plugin.getCommand(cmd.getInfo().name().toLowerCase()).setExecutor(null);
             commands.remove(clazz);
         }
+    }
+
+    public <T extends JavaPlugin> void unregisterAll(Class<T> pluginClass){
+        commands.entrySet().stream()
+                .filter(e -> e.getValue().getPlugin().getClass().isAssignableFrom(pluginClass))
+                .forEach(e -> this.unregister(e.getKey()));
     }
 
     public void unregisterAll(){

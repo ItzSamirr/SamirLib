@@ -2,9 +2,13 @@ package it.itzsamirr.samirlib;
 
 
 import it.itzsamirr.samirlib.command.CommandManager;
+import it.itzsamirr.samirlib.event.AsyncTickEvent;
+import it.itzsamirr.samirlib.event.EventManager;
+import it.itzsamirr.samirlib.event.TickEvent;
 import it.itzsamirr.samirlib.menu.MenuManager;
 import it.itzsamirr.samirlib.player.PlayerManager;
 import it.itzsamirr.samirlib.utils.SamirLogger;
+import org.bukkit.Bukkit;
 
 /**
  * @author ItzSamirr
@@ -16,6 +20,9 @@ public final class SamirLib {
     private CommandManager commandManager;
     private PlayerManager playerManager;
     private MenuManager menuManager;
+    private EventManager eventManager;
+    private AsyncTickEvent asyncTickEvent;
+    private TickEvent tickEvent;
     private SamirLogger<SamirLibPlugin> logger;
 
     private SamirLib(SamirLibPlugin plugin)
@@ -25,9 +32,16 @@ public final class SamirLib {
 
     void onEnable(){
         this.logger = new SamirLogger<>(plugin, "&7[&bSamirLib&7]");
-        this.commandManager = new CommandManager(plugin);
+        this.commandManager = new CommandManager();
         this.playerManager = new PlayerManager();
         this.menuManager = new MenuManager();
+        this.eventManager = new EventManager();
+        this.asyncTickEvent = new AsyncTickEvent();
+        this.tickEvent = new TickEvent();
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            this.eventManager.call(tickEvent);
+        }, 0, 1);
+        Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, () -> this.eventManager.call(asyncTickEvent), 0, 1);
     }
 
     void onDisable(){
