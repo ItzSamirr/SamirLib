@@ -33,6 +33,10 @@ public class CommandManager {
         }
     }
 
+    public boolean isRegistered(Class<? extends AbstractCommand<?>> clazz){
+        return commands.containsKey(clazz);
+    }
+
     public void unregister(Class<? extends AbstractCommand<?>> clazz){
         if(commands.containsKey(clazz)){
             AbstractCommand<?> cmd = commands.get(clazz);

@@ -60,9 +60,8 @@ public class CustomConfigYaml<T extends JavaPlugin> {
         set(path, o, false);
     }
 
-    @SuppressWarnings("unchecked cast")
     public <V> V get(String path, Class<V> clazz){
-        return (V) get(path);
+        return clazz.cast(get(path));
     }
 
     public Object get(String path){
