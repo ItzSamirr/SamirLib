@@ -69,6 +69,10 @@ public final class SamirLib {
         return menuManager;
     }
 
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
     public static SamirLib getInstance() {
         if(instance == null) instance = new SamirLib(SamirLibPlugin.getPlugin(SamirLibPlugin.class));
         return instance;

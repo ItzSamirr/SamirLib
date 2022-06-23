@@ -1,6 +1,7 @@
 package it.itzsamirr.samirlib.menu;
 
 import it.itzsamirr.samirlib.utils.ItemBuilder;
+import it.itzsamirr.samirlib.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -36,7 +37,7 @@ public abstract class Menu<T extends JavaPlugin> implements InventoryHolder {
         return playerMenuData;
     }
 
-    public static final ItemStack FILLER_GLASS = new ItemBuilder(Material.THIN_GLASS).name("").flag(ItemFlag.HIDE_ATTRIBUTES).build();
+    public static final ItemStack FILLER_GLASS = new ItemBuilder(ItemUtils.getMaterial("GLASS_PANE", "THIN_GLASS")).name("").flag(ItemFlag.HIDE_ATTRIBUTES).build();
 
     public abstract String getName();
 
@@ -84,7 +85,7 @@ public abstract class Menu<T extends JavaPlugin> implements InventoryHolder {
     }
 
     public Predicate<Integer> getSlotClickFilter(){
-        return i -> false;
+        return i -> true;
     }
 
 

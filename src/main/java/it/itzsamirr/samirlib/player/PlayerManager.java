@@ -1,5 +1,7 @@
 package it.itzsamirr.samirlib.player;
 
+import it.itzsamirr.samirlib.SamirLib;
+import it.itzsamirr.samirlib.event.player.PlayerWrapEvent;
 import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +21,9 @@ public class PlayerManager {
         PlayerWrapper<T> wrapper;
         if(wrappers.stream().noneMatch(wp -> wp.getUUID().equals(p.getUniqueId()) && wp.getPlugin().getClass().isAssignableFrom(plugin.getClass()))){
             wrapper = new PlayerWrapper<>(plugin, p);
+            PlayerWrapEvent<T> wrapEvent = new PlayerWrapEvent<>(wrapper);
+            SamirLib.getInstance().getEventManager().call(wrapEvent);
+            if(wrapEvent.isCancelled()) return null;
             wrappers.add(wrapper);
         }else{
             wrapper = wrappers.stream()
