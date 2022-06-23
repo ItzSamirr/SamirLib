@@ -17,7 +17,6 @@ import java.util.UUID;
 * Created at 07.06.2022
 **/
 
-@Data
 public class PlayerWrapper<T extends JavaPlugin> {
     protected Player player;
     protected T plugin;
@@ -25,6 +24,22 @@ public class PlayerWrapper<T extends JavaPlugin> {
     protected PlayerWrapper(T plugin, Player player) {
         this.plugin = plugin;
         this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public T getPlugin() {
+        return plugin;
+    }
+
+    public void setPlugin(T plugin) {
+        this.plugin = plugin;
     }
 
     public int getPing(){
