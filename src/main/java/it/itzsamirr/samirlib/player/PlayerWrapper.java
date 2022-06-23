@@ -27,7 +27,7 @@ public class PlayerWrapper<T extends JavaPlugin> {
     }
 
     public Player getPlayer() {
-        return player;
+        return player;//a
     }
 
     public void setPlayer(Player player) {
