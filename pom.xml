@@ -39,12 +39,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>lombok</pattern>
-                                    <shadedPattern>it.itzsamirr.samirlib.lib.lombok</shadedPattern>
-                                </relocation>
-                            </relocations>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
                 </executions>
