@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author ItzSamirr
  * Created at 23.06.2022
  **/
-public abstract class PlayerEvent<T extends JavaPlugin> extends Event {
+public abstract class PlayerEvent<T extends JavaPlugin> implements Event {
     private PlayerWrapper<T> playerWrapper;
     private T plugin;
 
