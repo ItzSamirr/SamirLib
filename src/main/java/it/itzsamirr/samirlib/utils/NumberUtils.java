@@ -23,6 +23,10 @@ public class NumberUtils {
         return ThreadLocalRandom.current().nextDouble(min, max);
     }
 
+    public double genRandomDouble(){
+        return ThreadLocalRandom.current().nextDouble();
+    }
+
     public double genRandomDouble(double min){
         return genRandomDouble(min, Double.MAX_VALUE);
     }

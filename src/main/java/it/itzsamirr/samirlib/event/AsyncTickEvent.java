@@ -10,5 +10,5 @@ package it.itzsamirr.samirlib.event;
  * <p><STRONG>Is preferred to not use Bukkit nor Spigot api when listening for this event</STRONG></p>
  *
  **/
-public final class AsyncTickEvent extends Event{
+public final class AsyncTickEvent implements Event{
 }

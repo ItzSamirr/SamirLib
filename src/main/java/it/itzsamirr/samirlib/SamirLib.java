@@ -47,6 +47,7 @@ public final class SamirLib {
     void onDisable(){
         instance = null;
         commandManager.unregisterAll();
+        Bukkit.getScheduler().cancelTasks(plugin);
     }
 
     public PlayerManager getPlayerManager() {
