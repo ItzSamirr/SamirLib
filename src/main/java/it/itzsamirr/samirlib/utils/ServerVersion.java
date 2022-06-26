@@ -17,7 +17,7 @@ public enum ServerVersion {
         String version = String.valueOf(ReflectionUtils.getReleaseVersion());
         serverVersion = getServerVersion(version);
         if(serverVersion == UNDEFINED){
-            SamirLib.getInstance().getLogger().error("Unknown server version: " + version);
+            SamirLib.getInstance().getPlugin().getCustomLogger().error("Unknown server version: " + version);
             server.getPluginManager().disablePlugin(SamirLib.getInstance().getPlugin());
         }
     }
