@@ -8,6 +8,7 @@ import it.itzsamirr.samirlib.event.TickEvent;
 import it.itzsamirr.samirlib.menu.MenuManager;
 import it.itzsamirr.samirlib.player.PlayerWrapperManager;
 import it.itzsamirr.samirlib.utils.SamirLogger;
+import it.itzsamirr.samirlib.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 
 /**
@@ -23,7 +24,6 @@ public final class SamirLib {
     private EventManager eventManager;
     private AsyncTickEvent asyncTickEvent;
     private TickEvent tickEvent;
-    private SamirLogger<SamirLibPlugin> logger;
 
     private SamirLib(SamirLibPlugin plugin)
     {
@@ -31,7 +31,6 @@ public final class SamirLib {
     }
 
     void onEnable(){
-        this.logger = new SamirLogger<>(plugin, "&7[&bSamirLib&7]");
         this.commandManager = new CommandManager();
         this.playerManager = new PlayerWrapperManager();
         this.menuManager = new MenuManager();
@@ -58,10 +57,6 @@ public final class SamirLib {
 
     public SamirLibPlugin getPlugin() {
         return plugin;
-    }
-
-    public SamirLogger<SamirLibPlugin> getLogger() {
-        return logger;
     }
 
     public CommandManager getCommandManager() {
