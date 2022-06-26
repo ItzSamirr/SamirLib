@@ -88,6 +88,25 @@ public class ReflectionUtils {
         return methodsCache.get(clazz);
     }
 
+    public List<Field> getFields(Class<?> clazz){
+        if(!fieldsCache.containsKey(clazz)){
+            return fieldsCache.put(clazz, Arrays.asList(clazz.getDeclaredFields()));
+        }
+        List<Field> fields = fieldsCache.get(clazz);
+        List<Field> clazzFields = Arrays.asList(clazz.getDeclaredFields());
+        if(clazzFields.isEmpty()) {
+            fields.clear();
+            fieldsCache.replace(clazz, fields);
+            return fieldsCache.get(clazz);
+        }
+        fields.removeIf(field -> !clazzFields.contains(field));
+        for(Field field : clazzFields){
+            if(!fields.contains(field)) fields.add(field);
+        }
+        fieldsCache.replace(clazz, fields);
+        return fieldsCache.get(clazz);
+    }
+
     public Method getMethod(String className, String name, Class<?>... parameterTypes){
         return getMethod(getClass(className), name, parameterTypes);
     }

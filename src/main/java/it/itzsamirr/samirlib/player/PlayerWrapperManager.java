@@ -2,7 +2,6 @@ package it.itzsamirr.samirlib.player;
 
 import it.itzsamirr.samirlib.SamirLib;
 import it.itzsamirr.samirlib.event.player.PlayerWrapEvent;
-import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,7 +12,7 @@ import java.util.List;
 * @author ItzSamirr
 * Created at 07.06.2022
 **/
-public class PlayerManager {
+public class PlayerWrapperManager {
     private List<PlayerWrapper<?>> wrappers = new ArrayList<>();
 
     @SuppressWarnings({"unchecked cast", "OptionalGetWithoutIsPresent"})

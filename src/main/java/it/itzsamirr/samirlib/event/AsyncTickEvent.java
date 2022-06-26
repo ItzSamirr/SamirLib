@@ -10,5 +10,16 @@ package it.itzsamirr.samirlib.event;
  * <p><STRONG>Is preferred to not use Bukkit nor Spigot api when listening for this event</STRONG></p>
  *
  **/
-public final class AsyncTickEvent implements Event{
+public final class AsyncTickEvent implements Event, Cancellable{
+    private boolean cancelled = false;
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancelled = cancel;
+    }
 }

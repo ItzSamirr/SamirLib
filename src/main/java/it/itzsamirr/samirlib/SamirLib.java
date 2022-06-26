@@ -6,7 +6,7 @@ import it.itzsamirr.samirlib.event.AsyncTickEvent;
 import it.itzsamirr.samirlib.event.EventManager;
 import it.itzsamirr.samirlib.event.TickEvent;
 import it.itzsamirr.samirlib.menu.MenuManager;
-import it.itzsamirr.samirlib.player.PlayerManager;
+import it.itzsamirr.samirlib.player.PlayerWrapperManager;
 import it.itzsamirr.samirlib.utils.SamirLogger;
 import org.bukkit.Bukkit;
 
@@ -18,7 +18,7 @@ public final class SamirLib {
     private static SamirLib instance;
     private final SamirLibPlugin plugin;
     private CommandManager commandManager;
-    private PlayerManager playerManager;
+    private PlayerWrapperManager playerManager;
     private MenuManager menuManager;
     private EventManager eventManager;
     private AsyncTickEvent asyncTickEvent;
@@ -33,15 +33,17 @@ public final class SamirLib {
     void onEnable(){
         this.logger = new SamirLogger<>(plugin, "&7[&bSamirLib&7]");
         this.commandManager = new CommandManager();
-        this.playerManager = new PlayerManager();
+        this.playerManager = new PlayerWrapperManager();
         this.menuManager = new MenuManager();
         this.eventManager = new EventManager();
         this.asyncTickEvent = new AsyncTickEvent();
         this.tickEvent = new TickEvent();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            this.eventManager.call(tickEvent);
+            if(!tickEvent.isCancelled())this.eventManager.call(tickEvent);
         }, 0, 1);
-        Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, () -> this.eventManager.call(asyncTickEvent), 0, 1);
+        Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, () -> {
+          if(!asyncTickEvent.isCancelled())  this.eventManager.call(asyncTickEvent);
+        }, 0, 1);
     }
 
     void onDisable(){
@@ -50,7 +52,7 @@ public final class SamirLib {
         Bukkit.getScheduler().cancelTasks(plugin);
     }
 
-    public PlayerManager getPlayerManager() {
+    public PlayerWrapperManager getPlayerManager() {
         return playerManager;
     }
 
