@@ -3,4 +3,4 @@ version: '${project.version}'
 main: it.itzsamirr.samirlib.SamirLibPlugin
 api-version: 1.13
 authors: [ ItzSamirr ]
-description: A library for my plugins
+description: A library/API for my plugins

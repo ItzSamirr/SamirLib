@@ -13,24 +13,24 @@ import java.util.stream.Stream;
 public class MathUtils {
     public double avg(double... doubles){
         double sum = 0;
-        for (int i = 0; i < doubles.length; i++) {
-            sum += doubles[i];
+        for (double aDouble : doubles) {
+            sum += aDouble;
         }
         return sum/doubles.length;
     }
 
     public int avg(int... ints){
         int sum = 0;
-        for (int i = 0; i < ints.length; i++) {
-            sum += ints[i];
+        for (int anInt : ints) {
+            sum += anInt;
         }
         return Math.toIntExact(Math.round(sum / (double) ints.length));
     }
 
     public float avg(float... floats){
         float sum = 0;
-        for (int i = 0; i < floats.length; i++) {
-            sum += floats[i];
+        for (float aFloat : floats) {
+            sum += aFloat;
         }
         return sum/floats.length;
     }

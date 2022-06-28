@@ -2,7 +2,6 @@ package it.itzsamirr.samirlib.utils;
 
 import it.itzsamirr.samirlib.plugin.SamirPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -36,7 +35,15 @@ public class UpdateChecker<T extends SamirPlugin> {
     }
 
     public void check(Consumer<String> consumer, long period){
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> check(consumer), 0L, period);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+            try(InputStream is = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + id).openStream(); Scanner sc = new Scanner(is)){
+                if(sc.hasNext()){
+                    Bukkit.getScheduler().runTask(plugin, () -> consumer.accept(sc.next()));
+                }
+            } catch (Exception e) {
+                plugin.getCustomLogger().error("&cError while checking for updates: " + e.getMessage());
+            }
+        }, 0L, period);
     }
 
     public int getId() {
