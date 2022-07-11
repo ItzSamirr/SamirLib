@@ -1,4 +1,4 @@
-package it.itzsamirr.samirlib.configuration;
+package it.itzsamirr.samirlib.configuration.yml;
 
 import lombok.Data;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,12 +14,12 @@ import java.io.IOException;
 **/
 
 @Data
-public class CustomConfigYaml<T extends JavaPlugin> {
+public class YamlConfig<T extends JavaPlugin> {
     protected File file;
     protected FileConfiguration configuration;
     protected T plugin;
 
-    public CustomConfigYaml(T plugin, String name) {
+    public YamlConfig(T plugin, String name) {
         this.plugin = plugin;
         if(!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdirs();
         StringBuilder bname = new StringBuilder();

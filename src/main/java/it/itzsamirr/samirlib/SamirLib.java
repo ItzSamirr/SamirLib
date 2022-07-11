@@ -2,6 +2,7 @@ package it.itzsamirr.samirlib;
 
 
 import it.itzsamirr.samirlib.command.CommandManager;
+import it.itzsamirr.samirlib.configuration.json.JsonConfigManager;
 import it.itzsamirr.samirlib.event.AsyncTickEvent;
 import it.itzsamirr.samirlib.event.EventManager;
 import it.itzsamirr.samirlib.event.TickEvent;
@@ -23,6 +24,7 @@ public final class SamirLib {
     private MenuManager menuManager;
     private EventManager eventManager;
     private AsyncTickEvent asyncTickEvent;
+    private JsonConfigManager jsonConfigManager;
     private TickEvent tickEvent;
 
     private SamirLib(SamirLibPlugin plugin)
@@ -35,6 +37,7 @@ public final class SamirLib {
         this.playerManager = new PlayerWrapperManager();
         this.menuManager = new MenuManager();
         this.eventManager = new EventManager();
+        this.jsonConfigManager = new JsonConfigManager();
         this.asyncTickEvent = new AsyncTickEvent();
         this.tickEvent = new TickEvent();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
@@ -69,6 +72,10 @@ public final class SamirLib {
 
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    public JsonConfigManager getJsonConfigManager() {
+        return jsonConfigManager;
     }
 
     public static SamirLib getInstance() {
