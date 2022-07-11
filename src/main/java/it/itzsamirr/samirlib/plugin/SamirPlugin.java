@@ -1,5 +1,6 @@
 package it.itzsamirr.samirlib.plugin;
 
+import it.itzsamirr.samirlib.SamirLib;
 import it.itzsamirr.samirlib.utils.SamirLogger;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -32,6 +33,7 @@ public abstract class SamirPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         disable();
+        SamirLib.getInstance().getJsonConfigManager().save(this);
         Bukkit.getScheduler().cancelTasks(this);
     }
 

@@ -50,8 +50,18 @@ public final class SamirLib {
 
     void onDisable(){
         instance = null;
+        jsonConfigManager.saveAll();
         commandManager.unregisterAll();
-        Bukkit.getScheduler().cancelTasks(plugin);
+        eventManager.unregisterAll();
+        playerManager.unregisterAll();
+        jsonConfigManager.unregisterAll();
+        this.tickEvent = null;
+        this.playerManager = null;
+        this.menuManager = null;
+        this.eventManager = null;
+        this.asyncTickEvent = null;
+        this.commandManager = null;
+        this.jsonConfigManager = null;
     }
 
     public PlayerWrapperManager getPlayerManager() {

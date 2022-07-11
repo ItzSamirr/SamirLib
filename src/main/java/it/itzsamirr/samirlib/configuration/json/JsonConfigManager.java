@@ -25,6 +25,10 @@ public class JsonConfigManager {
         return config;
     }
 
+    public void unregisterAll(){
+        registeredConfigs.clear();
+    }
+
     public void saveAll(){
         registeredConfigs.values().forEach(v -> v.forEach(JsonConfig::save));
     }
@@ -50,6 +54,7 @@ public class JsonConfigManager {
     }
 
     public ArrayList<JsonConfig<? extends JavaPlugin>> getRegisteredConfigs(JavaPlugin plugin){
+        if(!registeredConfigs.containsKey(plugin)) return new ArrayList<>();
         return registeredConfigs.get(plugin);
     }
 }

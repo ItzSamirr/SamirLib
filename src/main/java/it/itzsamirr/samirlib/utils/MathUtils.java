@@ -11,6 +11,8 @@ import java.util.stream.Stream;
  **/
 @UtilityClass
 public class MathUtils {
+
+
     public double avg(double... doubles){
         double sum = 0;
         for (double aDouble : doubles) {

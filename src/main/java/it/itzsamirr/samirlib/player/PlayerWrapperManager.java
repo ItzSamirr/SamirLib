@@ -34,4 +34,8 @@ public class PlayerWrapperManager {
         }
         return wrapper;
     }
+
+    public void unregisterAll(){
+        wrappers.clear();
+    }
 }
