@@ -57,7 +57,7 @@ public final class JsonConfigBuilder<T extends JavaPlugin> {
     }
 
     public JsonConfig build() {
-        return new AbstractJsonConfig(plugin, gson, file) {
+        return new AbstractJsonConfig<T>(plugin, gson, file) {
             @Override
             public void load() {
                 onLoad.accept(gson, new AbstractMap.SimpleEntry<>(file, JsonConfigBuilder.this.plugin));

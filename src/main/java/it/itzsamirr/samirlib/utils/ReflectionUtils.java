@@ -66,7 +66,7 @@ public class ReflectionUtils {
         }
         List<Method> methods = methodsCache.get(clazz);
         if(methods.stream().noneMatch(m -> m.getName().equals(name) && Arrays.equals(m.getParameterTypes(), parameters))){
-            methods.add(clazz.getMethod(name, parameters));
+            methods.add(clazz.getDeclaredMethod(name, parameters));
             methodsCache.replace(clazz, methods);
         }
         return methodsCache.get(clazz)
