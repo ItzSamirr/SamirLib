@@ -2,7 +2,6 @@ package it.itzsamirr.samirlib.configuration.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.itzsamirr.samirlib.configuration.IConfigurationObject;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

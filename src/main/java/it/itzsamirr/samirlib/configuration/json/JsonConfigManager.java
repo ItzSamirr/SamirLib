@@ -1,17 +1,16 @@
 package it.itzsamirr.samirlib.configuration.json;
 
-import it.itzsamirr.samirlib.configuration.IConfigurationObject;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
+@SuppressWarnings("unchecked cast")
 public class JsonConfigManager {
     private HashMap<JavaPlugin, ArrayList<JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>>> registeredConfigs = new HashMap<>();
 
@@ -44,6 +43,14 @@ public class JsonConfigManager {
 
     public <T extends JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>> T getJsonConfig(Class<T> clazz){
         return registeredConfigs.values().stream().filter(config -> config.getClass().isAssignableFrom(clazz)).findFirst().map(clazz::cast).orElse(null);
+    }
+
+    public <T extends JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>> T getJsonConfig(Class<T> clazz, JavaPlugin plugin){
+        return getRegisteredConfigs(plugin).stream().filter(config -> config.getClass().isAssignableFrom(clazz)).findFirst().map(clazz::cast).orElse(null);
+    }
+
+    public <T extends JavaPlugin, E extends IConfigurationObject> JsonConfig<T, E> getJsonConfig(T plugin, String name, Class<E> clazz){
+        return (JsonConfig<T, E>) getRegisteredConfigs(plugin).stream().filter(config -> config.getFile().getName().equals(name)).findFirst().orElse(null);
     }
 
     public void loadAll(){

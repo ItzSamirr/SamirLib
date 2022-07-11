@@ -1,15 +1,8 @@
 package it.itzsamirr.samirlib.configuration.json;
 
-import com.google.gson.Gson;
-import it.itzsamirr.samirlib.configuration.IConfigurationObject;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

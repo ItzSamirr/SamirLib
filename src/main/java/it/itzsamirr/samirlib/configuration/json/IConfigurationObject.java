@@ -1,4 +1,4 @@
-package it.itzsamirr.samirlib.configuration;
+package it.itzsamirr.samirlib.configuration.json;
 
 import it.itzsamirr.samirlib.configuration.json.annotations.JsonPath;
 import it.itzsamirr.samirlib.utils.ReflectionUtils;
@@ -19,7 +19,7 @@ public interface IConfigurationObject {
                 boolean wasAccessible = field.isAccessible();
                 try {
                     field.setAccessible(true);
-                    map.put(path.name(), field.get(this));
+                    map.put(path.name(), field.getType().cast(field.get(this)));
                     field.setAccessible(wasAccessible);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

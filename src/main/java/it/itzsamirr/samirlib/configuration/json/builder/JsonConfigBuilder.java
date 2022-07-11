@@ -1,8 +1,7 @@
 package it.itzsamirr.samirlib.configuration.json.builder;
 
 import com.google.gson.Gson;
-import it.itzsamirr.samirlib.configuration.IConfigurationObject;
-import it.itzsamirr.samirlib.configuration.json.AbstractJsonConfig;
+import it.itzsamirr.samirlib.configuration.json.IConfigurationObject;
 import it.itzsamirr.samirlib.configuration.json.JsonConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,8 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * @author ItzSamirr
