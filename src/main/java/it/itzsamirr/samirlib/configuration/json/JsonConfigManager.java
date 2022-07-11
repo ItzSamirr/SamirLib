@@ -1,5 +1,6 @@
 package it.itzsamirr.samirlib.configuration.json;
 
+import it.itzsamirr.samirlib.configuration.IConfigurationObject;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -12,14 +13,14 @@ import java.util.List;
  * Created at 11.07.2022
  **/
 public class JsonConfigManager {
-    private HashMap<JavaPlugin, ArrayList<JsonConfig<? extends JavaPlugin>>> registeredConfigs = new HashMap<>();
+    private HashMap<JavaPlugin, ArrayList<JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>>> registeredConfigs = new HashMap<>();
 
-    public <T extends JavaPlugin> JsonConfig<T> registerConfig(JsonConfig<T> config){
+    public <T extends JavaPlugin, E extends IConfigurationObject> JsonConfig<T, E> registerConfig(JsonConfig<T, E> config){
         if(!registeredConfigs.containsKey(config.getPlugin())){
             registeredConfigs.put(config.getPlugin(), new ArrayList<>(Arrays.asList(config)));
             return config;
         }
-        ArrayList<JsonConfig<? extends JavaPlugin>> configs = getRegisteredConfigs(config.getPlugin());
+        ArrayList<JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>> configs = getRegisteredConfigs(config.getPlugin());
         configs.add(config);
         registeredConfigs.replace(config.getPlugin(), configs);
         return config;
@@ -41,19 +42,19 @@ public class JsonConfigManager {
         getRegisteredConfigs(plugin).forEach(JsonConfig::load);
     }
 
-    public <T extends JsonConfig<? extends JavaPlugin>> T getJsonConfig(Class<T> clazz){
-        return registeredConfigs.values().stream().filter(config -> config.getClass().equals(clazz)).findFirst().map(c -> clazz.cast(c)).orElse(null);
+    public <T extends JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>> T getJsonConfig(Class<T> clazz){
+        return registeredConfigs.values().stream().filter(config -> config.getClass().isAssignableFrom(clazz)).findFirst().map(clazz::cast).orElse(null);
     }
 
     public void loadAll(){
         registeredConfigs.values().forEach(v -> v.forEach(JsonConfig::load));
     }
 
-    public HashMap<JavaPlugin, ArrayList<JsonConfig<? extends JavaPlugin>>> getRegisteredConfigs() {
+    public HashMap<JavaPlugin, ArrayList<JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>>> getRegisteredConfigs() {
         return registeredConfigs;
     }
 
-    public ArrayList<JsonConfig<? extends JavaPlugin>> getRegisteredConfigs(JavaPlugin plugin){
+    public ArrayList<JsonConfig<? extends JavaPlugin, ? extends IConfigurationObject>> getRegisteredConfigs(JavaPlugin plugin){
         if(!registeredConfigs.containsKey(plugin)) return new ArrayList<>();
         return registeredConfigs.get(plugin);
     }
