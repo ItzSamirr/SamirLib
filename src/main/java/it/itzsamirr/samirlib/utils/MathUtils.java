@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class MathUtils {
 
 
-    public double avg(double... doubles){
+    public static double avg(double... doubles){
         double sum = 0;
         for (double aDouble : doubles) {
             sum += aDouble;
@@ -21,7 +21,7 @@ public class MathUtils {
         return sum/doubles.length;
     }
 
-    public int avg(int... ints){
+    public static int avg(int... ints){
         int sum = 0;
         for (int anInt : ints) {
             sum += anInt;
@@ -29,7 +29,7 @@ public class MathUtils {
         return Math.toIntExact(Math.round(sum / (double) ints.length));
     }
 
-    public float avg(float... floats){
+    public static float avg(float... floats){
         float sum = 0;
         for (float aFloat : floats) {
             sum += aFloat;
