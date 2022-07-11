@@ -31,12 +31,12 @@ public final class JsonConfigBuilder<T extends JavaPlugin> {
         this.file = file;
     }
 
-    public JsonConfigBuilder gson(Gson gson) {
+    public JsonConfigBuilder<T> gson(Gson gson) {
         this.gson = gson;
         return this;
     }
 
-    public JsonConfigBuilder file(File file) {
+    public JsonConfigBuilder<T> file(File file) {
         this.file = file;
         return this;
     }
@@ -46,12 +46,12 @@ public final class JsonConfigBuilder<T extends JavaPlugin> {
         return this;
     }
 
-    public JsonConfigBuilder onLoad(BiConsumer<Gson, AbstractMap.SimpleEntry<File, T>> onLoad) {
+    public JsonConfigBuilder<T> onLoad(BiConsumer<Gson, AbstractMap.SimpleEntry<File, T>> onLoad) {
         this.onLoad = onLoad;
         return this;
     }
 
-    public JsonConfigBuilder onSave(BiConsumer<Gson, AbstractMap.SimpleEntry<File, T>> onSave) {
+    public JsonConfigBuilder<T> onSave(BiConsumer<Gson, AbstractMap.SimpleEntry<File, T>> onSave) {
         this.onSave = onSave;
         return this;
     }
