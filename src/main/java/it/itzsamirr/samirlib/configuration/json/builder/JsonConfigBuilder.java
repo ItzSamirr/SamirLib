@@ -56,7 +56,7 @@ public final class JsonConfigBuilder<T extends JavaPlugin> {
         return this;
     }
 
-    public JsonConfig build() {
+    public JsonConfig<T> build() {
         return new AbstractJsonConfig<T>(plugin, gson, file) {
             @Override
             public void load() {
