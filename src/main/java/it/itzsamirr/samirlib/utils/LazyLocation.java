@@ -1,5 +1,7 @@
 package it.itzsamirr.samirlib.utils;
 
+import it.itzsamirr.samirlib.configuration.json.IConfigurationObject;
+import it.itzsamirr.samirlib.configuration.json.annotations.JsonPath;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -8,10 +10,19 @@ import org.bukkit.World;
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public final class LazyLocation{
+public final class LazyLocation implements IConfigurationObject {
+    @JsonPath(name = "world")
     private String world;
-    private double x, y, z;
-    private float yaw, pitch;
+    @JsonPath(name = "x")
+    private double x;
+    @JsonPath(name = "y")
+    private double y;
+    @JsonPath(name = "z")
+    private double z;
+    @JsonPath(name = "yaw")
+    private float yaw;
+    @JsonPath(name = "pitch")
+    private float pitch;
 
     public LazyLocation(String world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;

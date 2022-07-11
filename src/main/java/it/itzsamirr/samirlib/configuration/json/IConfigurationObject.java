@@ -12,14 +12,22 @@ import java.util.HashMap;
  **/
 public interface IConfigurationObject {
     default HashMap<String, Object> save(){
+        return convert(this);
+    }//
+
+    default HashMap<String, Object> convert(IConfigurationObject object){
         HashMap<String, Object> map = new HashMap<>();
-        for(Field field : ReflectionUtils.getFields(getClass())){
+        for(Field field : ReflectionUtils.getFields(object.getClass())){
             if(field.isAnnotationPresent(JsonPath.class)){
                 JsonPath path = field.getAnnotation(JsonPath.class);
                 boolean wasAccessible = field.isAccessible();
                 try {
                     field.setAccessible(true);
-                    map.put(path.name(), field.getType().cast(field.get(this)));
+                    if(field.getType().isAssignableFrom(IConfigurationObject.class)){
+                        map.put(path.name(), convert((IConfigurationObject) field.get(object)));
+                    } else {
+                        map.put(path.name(), field.getType().cast(field.get(object)));
+                    }
                     field.setAccessible(wasAccessible);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

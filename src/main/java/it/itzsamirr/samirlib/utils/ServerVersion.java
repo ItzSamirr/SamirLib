@@ -3,6 +3,7 @@ package it.itzsamirr.samirlib.utils;
 import it.itzsamirr.samirlib.SamirLib;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.plugin.Plugin;
 
 /**
  * @author ItzSamirr
@@ -18,6 +19,11 @@ public enum ServerVersion {
         serverVersion = getServerVersion(version);
         if(serverVersion == UNDEFINED){
             SamirLib.getInstance().getPlugin().getCustomLogger().error("Unknown server version: " + version);
+            for(Plugin plugin : server.getPluginManager().getPlugins()){
+                if(plugin.getDescription().getDepend().contains("SamirLib")){
+                    server.getPluginManager().disablePlugin(plugin);
+                }
+            }
             server.getPluginManager().disablePlugin(SamirLib.getInstance().getPlugin());
         }
     }
