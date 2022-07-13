@@ -1,18 +1,13 @@
 package it.itzsamirr.samirlib.database;
 
-import com.google.common.collect.Maps;
-import com.sun.rowset.CachedRowSetImpl;
-import com.sun.rowset.RowSetFactoryImpl;
 import it.itzsamirr.samirlib.SamirLib;
 import it.itzsamirr.samirlib.event.database.DatabaseSetupEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.sql.rowset.CachedRowSet;
-import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 import java.util.*;
@@ -25,14 +20,14 @@ import java.util.concurrent.CompletableFuture;
 public abstract class Database<T extends JavaPlugin> {
     private T plugin;
     private Connection connection;
-    private String classname, url, user, password;
+    private String classname, url, username, password;
     private HashMap<String, List<DefaultValue<?>>> defaultValues = new HashMap<>();
 
     public Database(T plugin, String url, String classname, String user, String password, String[] defaultTables, DefaultValue<?>[]... defaultValues) {
         this.plugin = plugin;
         this.url = url;
         this.classname = classname;
-        this.user = user;
+        this.username = user;
         this.password = password;
         for (int i = 0; i < defaultTables.length; i++) {
             List<DefaultValue<?>> list = Arrays.asList(defaultValues[i]);
@@ -68,7 +63,7 @@ public abstract class Database<T extends JavaPlugin> {
             e.printStackTrace();
         }
         try {
-            return connection = DriverManager.getConnection(url, user, password);
+            return connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
