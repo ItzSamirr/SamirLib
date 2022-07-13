@@ -15,7 +15,7 @@ import java.util.List;
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public interface JsonConfig<T extends JavaPlugin, E extends IConfigurationObject> {
+public interface JsonConfig<T extends JavaPlugin, E extends ConfigurationObject> {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     default Gson getGson(){
         return gson;
@@ -24,7 +24,7 @@ public interface JsonConfig<T extends JavaPlugin, E extends IConfigurationObject
     List<E> getList();
     T getPlugin();
     default void save(){
-        List<HashMap<String, Object>> list = getList().stream().map(IConfigurationObject::save).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        List<HashMap<String, Object>> list = getList().stream().map(ConfigurationObject::save).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
         try {
             FileWriter writer = new FileWriter(getFile(), false);
             HashMap<String, Object>[] array = new HashMap[list.size()];

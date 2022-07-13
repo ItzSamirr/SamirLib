@@ -9,7 +9,7 @@ import java.util.List;
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public abstract class AbstractJsonConfig<T extends JavaPlugin, E extends IConfigurationObject> implements JsonConfig<T, E>{
+public abstract class AbstractJsonConfig<T extends JavaPlugin, E extends ConfigurationObject> implements JsonConfig<T, E>{
     protected File file;
     protected List<E> list;
     protected T plugin;

@@ -1,7 +1,7 @@
 package it.itzsamirr.samirlib.configuration.json.builder;
 
 import com.google.gson.Gson;
-import it.itzsamirr.samirlib.configuration.json.IConfigurationObject;
+import it.itzsamirr.samirlib.configuration.json.ConfigurationObject;
 import it.itzsamirr.samirlib.configuration.json.JsonConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,7 +15,7 @@ import java.util.function.BiConsumer;
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public final class JsonConfigBuilder<T extends JavaPlugin, E extends IConfigurationObject> {
+public final class JsonConfigBuilder<T extends JavaPlugin, E extends ConfigurationObject> {
     private BiConsumer<File, AbstractMap.SimpleEntry<Gson, T>> onLoad;
     private BiConsumer<File, AbstractMap.SimpleEntry<Gson, T>> onSave;
     private List<E> list;
@@ -26,7 +26,7 @@ public final class JsonConfigBuilder<T extends JavaPlugin, E extends IConfigurat
         this.list = list;
         this.onLoad = (file1, e) -> {};
         this.onSave = (file1, e) -> {
-            List<HashMap<String, Object>> list1 = list.stream().map(IConfigurationObject::save).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            List<HashMap<String, Object>> list1 = list.stream().map(ConfigurationObject::save).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
             try {
                 FileWriter writer = new FileWriter(file1, false);
                 HashMap<String, Object>[] array = new HashMap[list.size()];

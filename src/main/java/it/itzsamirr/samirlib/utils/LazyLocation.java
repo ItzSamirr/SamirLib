@@ -1,6 +1,6 @@
 package it.itzsamirr.samirlib.utils;
 
-import it.itzsamirr.samirlib.configuration.json.IConfigurationObject;
+import it.itzsamirr.samirlib.configuration.json.ConfigurationObject;
 import it.itzsamirr.samirlib.configuration.json.annotations.JsonPath;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,7 +10,7 @@ import org.bukkit.World;
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public final class LazyLocation implements IConfigurationObject {
+public final class LazyLocation implements ConfigurationObject {
     @JsonPath(name = "world")
     private String world;
     @JsonPath(name = "x")
