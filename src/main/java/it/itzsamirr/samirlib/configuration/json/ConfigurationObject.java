@@ -14,11 +14,25 @@ import java.util.HashMap;
  **/
 public abstract class ConfigurationObject {
     protected ConfigurationObject(HashMap<String, Object> map){
+        deserialize(map);
+    }
+
+    @SuppressWarnings("unchecked cast")
+    private void deserialize(HashMap<String, Object> map){
         for(Field field : ReflectionUtils.getFields(getClass())){
             if(!isFieldValid(field))continue;
             JsonPath path = field.getDeclaredAnnotation(JsonPath.class);
             String name = path.name();
             if(!map.containsKey(name))continue;
+            if(field.getType().isAssignableFrom(ConfigurationObject.class)){
+                HashMap<String, Object> fieldMap = (HashMap<String, Object>) map.get(name);
+                try {
+                    field.set(this, ConfigurationObject.deserialize(fieldMap, (Class<? extends ConfigurationObject>)field.getType()));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }
             try {
                 field.set(this, field.getType().cast(map.get(name)));
             } catch (IllegalAccessException e) {
