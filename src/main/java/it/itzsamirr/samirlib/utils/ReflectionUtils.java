@@ -18,9 +18,9 @@ import java.util.List;
 
 @UtilityClass
 public class ReflectionUtils {
-    private HashMap<Class<?>, List<Method>> methodsCache = new HashMap<>();
-    private HashMap<Class<?>, List<Field>> fieldsCache = new HashMap<>();
-    private HashMap<String, Class<?>> classesCache = new HashMap<>();
+    private final HashMap<Class<?>, List<Method>> methodsCache = new HashMap<>();
+    private final HashMap<Class<?>, List<Field>> fieldsCache = new HashMap<>();
+    private final HashMap<String, Class<?>> classesCache = new HashMap<>();
     private String minecraftVersion;
     private int releaseVersion;
 
