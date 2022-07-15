@@ -6,11 +6,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.util.HashMap;
+
 /**
  * @author ItzSamirr
  * Created at 11.07.2022
  **/
-public final class LazyLocation implements ConfigurationObject {
+public final class LazyLocation extends ConfigurationObject {
     @JsonPath(name = "world")
     private String world;
     @JsonPath(name = "x")
@@ -31,6 +33,10 @@ public final class LazyLocation implements ConfigurationObject {
         this.z = z;
         this.yaw = yaw;
         this.pitch = pitch;
+    }
+
+    public LazyLocation(HashMap<String, Object> map){
+        super(map);
     }
 
     public LazyLocation(String world, double x, double y, double z) {

@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Created at 11.07.2022
  **/
 public abstract class ConfigurationObject {
-    private ConfigurationObject(HashMap<String, Object> map){
+    protected ConfigurationObject(HashMap<String, Object> map){
         for(Field field : ReflectionUtils.getFields(getClass())){
             if(!isFieldValid(field))continue;
             JsonPath path = field.getDeclaredAnnotation(JsonPath.class);
@@ -26,6 +26,8 @@ public abstract class ConfigurationObject {
             }
         }
     }
+
+    public ConfigurationObject(){}
 
     private boolean isFieldValid(Field field){
         return field.isAnnotationPresent(JsonPath.class);
